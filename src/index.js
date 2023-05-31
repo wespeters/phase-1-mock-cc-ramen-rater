@@ -1,10 +1,13 @@
 // write your code here
-const ramenAPI = 'http://localhost:3000/ramens';
+const ramenURL = 'http://localhost:3000/ramens';
+
+const form = document.getElementById('new-ramen');
+form.addEventListener('submit', addNewRamen);
 
 fetchRamen();
 
 function fetchRamen() {
-  fetch(ramenAPI)
+  fetch(ramenURL)
     .then(res => res.json())
     .then(data => {
       data.forEach(ramen => {
@@ -36,9 +39,6 @@ function showRamenDetail(ramen) {
   ramenRating.textContent = ramen.rating;
 }
 
-const form = document.getElementById('new-ramen');
-form.addEventListener('submit', addNewRamen);
-
 function addNewRamen(e) {
   e.preventDefault();
 
@@ -51,4 +51,6 @@ function addNewRamen(e) {
   };
 
   createRamen(newRamen);
-};
+
+  document.getElementById('new-ramen').reset();
+}
